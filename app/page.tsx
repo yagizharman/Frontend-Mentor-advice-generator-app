@@ -14,7 +14,28 @@ type Props = {
 }
 
 export default function Home() {
-  const [data, setData] = useState<Props|undefined>();
+  const [data, setData] = useState<Props | undefined>();
+  
+  const handleClick = () => { 
+
+
+    const fetchData = async () => {
+      try {
+        const response = await axios.get<Props>('https://api.adviceslip.com/advice');
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  
+
+
+  }
+
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,7 +67,7 @@ export default function Home() {
 <img src="/images/pattern-divider-desktop.svg" alt="divider" />
           </div>
 <div className=' translate-y-8  flex justify-center items-center cursor-pointer '>
-<div className=' bg-myNeonGreen rounded-full shadow-none hover:shadow-shadowOnAllSides   '>
+<div onClick={handleClick} className=' bg-myNeonGreen rounded-full shadow-none hover:shadow-shadowOnAllSides   '>
 <img className='p-3 w-10 h-10  '  src="/images/icon-dice.svg" alt="divider" />
         </div>
         
